@@ -149,50 +149,7 @@ test.suite("parse", function(suite)
 		asserts.eq("qux", result["BAZ"])
 	end)
 
-	-- error cases
-
-	suite:case("errors on line without equals sign", function(asserts)
-		local ok = pcall(function()
-			dotenv.parse("NOEQUALSSIGN")
-		end)
-		asserts.eq(false, ok)
-	end)
-
-	suite:case("errors on empty variable name", function(asserts)
-		local ok = pcall(function()
-			dotenv.parse("=value")
-		end)
-		asserts.eq(false, ok)
-	end)
-
-	suite:case("errors on space in variable name", function(asserts)
-		local ok = pcall(function()
-			dotenv.parse("SPACE IN NAME=value")
-		end)
-		asserts.eq(false, ok)
-	end)
-
-	suite:case("errors on space in unquoted value", function(asserts)
-		local ok = pcall(function()
-			dotenv.parse("FOO=unquoted space")
-		end)
-		asserts.eq(false, ok)
-	end)
-
-	suite:case("errors on unclosed double quote", function(asserts)
-		local ok = pcall(function()
-			dotenv.parse('UNCLOSED="never closes')
-		end)
-		asserts.eq(false, ok)
-	end)
-
-	suite:case("errors on unclosed single quote", function(asserts)
-		local ok = pcall(function()
-			dotenv.parse("UNCLOSED='never closes")
-		end)
-		asserts.eq(false, ok)
-	end)
-
+	-- warnings
 	suite:case("warns when unquoted value contains variable syntax", function(asserts)
 		local warnings = {}
 		dotenv.parse("BASE=world\nUNQUOTED=${BASE}", false, function(msg)
@@ -241,6 +198,50 @@ test.suite("parse", function(suite)
 			table.insert(warnings, msg)
 		end)
 		asserts.eq(0, #warnings)
+	end)
+
+	-- error cases
+
+	suite:case("errors on line without equals sign", function(asserts)
+		local ok = pcall(function()
+			dotenv.parse("NOEQUALSSIGN")
+		end)
+		asserts.eq(false, ok)
+	end)
+
+	suite:case("errors on empty variable name", function(asserts)
+		local ok = pcall(function()
+			dotenv.parse("=value")
+		end)
+		asserts.eq(false, ok)
+	end)
+
+	suite:case("errors on space in variable name", function(asserts)
+		local ok = pcall(function()
+			dotenv.parse("SPACE IN NAME=value")
+		end)
+		asserts.eq(false, ok)
+	end)
+
+	suite:case("errors on space in unquoted value", function(asserts)
+		local ok = pcall(function()
+			dotenv.parse("FOO=unquoted space")
+		end)
+		asserts.eq(false, ok)
+	end)
+
+	suite:case("errors on unclosed double quote", function(asserts)
+		local ok = pcall(function()
+			dotenv.parse('UNCLOSED="never closes')
+		end)
+		asserts.eq(false, ok)
+	end)
+
+	suite:case("errors on unclosed single quote", function(asserts)
+		local ok = pcall(function()
+			dotenv.parse("UNCLOSED='never closes")
+		end)
+		asserts.eq(false, ok)
 	end)
 end)
 
