@@ -1,5 +1,4 @@
 --!nonstrict
---!nolint BuiltinGlobalWrite
 local test = require("@std/test")
 local dotenv = require("../src")
 
