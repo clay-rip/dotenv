@@ -1,0 +1,7 @@
+return {
+	package = {
+		name = "dotenv",
+		version = "1.0.0",
+		dependencies = {},
+	},
+}

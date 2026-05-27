@@ -1,0 +1,20 @@
+[tools]
+"github:luau-lang/lute" = "1.0.0"
+"github:JohnnyMorganz/StyLua" = "2.5.2"
+
+[tasks.format]
+description = "Format source files"
+run = "stylua src/ tests/"
+alias = "fmt"
+
+[tasks.lint]
+description = "Lint source files"
+run = "lute lint src/ tests/"
+
+[tasks.test]
+description = "Run tests"
+run = "lute test"
+
+# [tasks.start]
+# description = "Run the program"
+# run = "lute run src/init.luau"
